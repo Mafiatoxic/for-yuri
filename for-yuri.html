@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Yuri 🌸</title>
+
+<style>
+  :root {
+    --bg1: #ffe6f0;
+    --bg2: #fff6fa;
+    --card: rgba(255,255,255,0.96);
+    --text: #555;
+    --accent: #ff6f91;
+  }
+
+  body.night {
+    --bg1: #1a1a2e;
+    --bg2: #16213e;
+    --card: rgba(30,30,50,0.96);
+    --text: #ddd;
+    --accent: #ff9ecb;
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--bg1), var(--bg2));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    transition: 0.6s;
+  }
+
+  .card {
+    background: var(--card);
+    padding: 32px;
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    max-width: 360px;
+    animation: pop 1s ease;
+    z-index: 2;
+    transition: box-shadow 0.6s;
+  }
+
+  .card.glow {
+    box-shadow: 0 0 30px rgba(255,111,145,0.6);
+  }
+
+  @keyframes pop {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  h1 {
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .jp {
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  p {
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  button {
+    margin-top: 15px;
+    padding: 10px 22px;
+    border: none;
+    background: var(--accent);
+    color: white;
+    font-size: 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+  }
+
+  .hidden {
+    display: none;
+    margin-top: 18px;
+    font-size: 15px;
+    color: var(--accent);
+    min-height: 48px;
+  }
+
+  .controls {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .sakura, .heart {
+    position: absolute;
+    top: -10px;
+    pointer-events: none;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) rotate(360deg);
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <h1>Hey Yuri 🌸</h1>
+
+  <div class="jp">
+    君の笑顔は本当に素敵だよ
+  </div>
+
+  <p>
+    I made this little page just for you.  
+    It’s quiet, simple, and made with care.
+  </p>
+
+  <button onclick="reveal()">Click me 💗</button>
+
+  <div id="msg" class="hidden"></div>
+
+  <div class="controls">
+    <button onclick="toggleMode()">🌙 / ☀️</button>
+  </div>
+</div>
+
+<script>
+  const finalMessage = "もし少しでも笑顔になれたなら、それだけで嬉しいです 🌸";
+  let index = 0;
+
+  function reveal() {
+    const msg = document.getElementById("msg");
+    const card = document.getElementById("card");
+    msg.style.display = "block";
+    card.classList.add("glow");
+
+    const typing = setInterval(() => {
+      if (index < finalMessage.length) {
+        msg.textContent += finalMessage.charAt(index);
+        index++;
+      } else {
+        clearInterval(typing);
+      }
+    }, 80);
+  }
+
+  function toggleMode() {
+    document.body.classList.toggle("night");
+  }
+
+  // Sakura petals
+  for (let i = 0; i < 18; i++) {
+    let petal = document.createElement("div");
+    petal.innerHTML = "🌸";
+    petal.className = "sakura";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = (6 + Math.random() * 6) + "s";
+    petal.style.fontSize = (16 + Math.random() * 12) + "px";
+    document.body.appendChild(petal);
+  }
+
+  // Hearts
+  for (let i = 0; i < 10; i++) {
+    let heart = document.createElement("div");
+    heart.innerHTML = "💗";
+    heart.className = "heart";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+    heart.style.fontSize = (14 + Math.random() * 10) + "px";
+    document.body.appendChild(heart);
+  }
+</script>
+
+</body>
+</html>
